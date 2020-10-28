@@ -1,12 +1,50 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import * as data from '../data/testData.js';
+import '../styles.css';
 
 function CreateQuiz({ data }) {
+  const [userInfo, setUserInfo] = React.useState({
+    firstName: '',
+    lastName: '',
+    email: '',
+    type: '',
+    emailConsent: false,
+    saveResults: false,
+    tookAssesment: false,
+  })
+
+  const [index, setIndex] = React.useState({
+    
+  })
+
+  const getVal = (e) => {
+      let inputVal = false;
+      if (e.target.type === 'radio') {
+        if (e.target.value === 'yes') {
+          inputVal = e.target.checked;
+        }
+      } else {
+        inputVal = e.target.value;
+      }
+
+      setUserInfo({...userInfo, [e.target.name]: inputVal});  
+    }
+
+  const answers = [];
+
+  data.answers.forEach((answer) => {
+    answers.push(
+      <>
+      <label htmlFor='yes' >{answer.text}</label>
+        <input type='radio' id='yes' name='answers' value='yes'/>
+      </>
+    )
+  })
   console.log(data);
   return (
     <form>
-      <h1>Quiz</h1>
+      <h1 >Quiz</h1>
       <fieldset>
         <legend>Personalia:</legend>
 
@@ -48,26 +86,32 @@ function CreateQuiz({ data }) {
           best, click "What's My Type?" to get your results!
         </p>
         <label htmlFor='firstName'>First name</label>
-        <input type='text' name='firstName' />
-        <label htmlFor='lastName'>First name</label>
-        <input type='text' name='lastName' />
+        <input type='text' name='firstName' onChange={getVal}
+          />
+        <label htmlFor='lastName'>Last name</label>
+        <input type='text' name='lastName' onChange={getVal}/>
+
         <p>Would you like to get emails from us?</p>
+        <label htmlFor='yes' >Yes</label>
+        <input type='radio' id='yes' name='emailConsent' value='yes' onChange={getVal}/>
+        <label htmlFor='no' >No</label>
+        <input type='radio' id='no' name='emailConsent' value='no'onChange={getVal} />
+
+        <p>Would you like us to save your result?</p>
         <label htmlFor='yes'>Yes</label>
-        <input type='radio' id='yes' name='emailChoice' value='yes' />
+        <input type='radio' id='yes' name='saveResults' value='yes' onChange={getVal}/>
         <label htmlFor='no'>No</label>
-        <input type='radio' id='no' name='emailChoice' value='no' />
-        <p>Would you like to get emails from us?</p>
-        <label htmlFor='yes'>Yes</label>
-        <input type='radio' id='yes' name='emailChoice' value='yes' />
-        <label htmlFor='no'>No</label>
-        <input type='radio' id='no' name='emailChoice' value='no' />
-        {/* conditionan on 'yes' */}
+        <input type='radio' id='no' name='saveResults' value='no' onChange={getVal}/>
+
+        {/* conditional on 'yes' */}
         <label htmlFor='email'>Email address</label>
-        <input type='email' name='email' />
+        <input type='email' name='email' onChange={getVal}/>
       </fieldset>
 
       <fieldset>
-        <p></p>
+        <div>{data.question}
+        </div>
+        {answers}
       </fieldset>
     </form>
   );
