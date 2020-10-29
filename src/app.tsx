@@ -12,39 +12,81 @@ function CreateQuiz({ data }) {
     emailConsent: false,
     saveResults: false,
     tookAssesment: false,
-  })
+  });
 
-  const [index, setIndex] = React.useState({
-    
-  })
+  const [index, setIndex] = React.useState(0);
 
   const getVal = (e) => {
-      let inputVal = false;
-      if (e.target.type === 'radio') {
-        if (e.target.value === 'yes') {
-          inputVal = e.target.checked;
-        }
-      } else {
-        inputVal = e.target.value;
+    let inputVal = false;
+    console.log('from getVal function', e.target);
+    if (e.target.type === 'radio') {
+      if (e.target.value === 'yes') {
+        inputVal = e.target.checked;
       }
-
-      setUserInfo({...userInfo, [e.target.name]: inputVal});  
+    } else {
+      inputVal = e.target.value;
     }
 
-  const answers = [];
+    setUserInfo({ ...userInfo, [e.target.name]: inputVal });
+  };
 
-  data.answers.forEach((answer) => {
-    answers.push(
-      <>
-      <label htmlFor='yes' >{answer.text}</label>
-        <input type='radio' id='yes' name='answers' value='yes'/>
-      </>
-    )
-  })
-  console.log(data);
+  // const answers = [];
+
+  // data.answers.forEach((answer, index) => {
+  //   answers.push(
+  //     <span key={index}>
+  //       <label htmlFor='yes'>{answer.text}</label>
+  //       <input type='radio' id='yes' name='answers' value='yes' />
+  //     </span>
+  //   );
+  // });
+
+  const TestComponent = ({ data }) => {
+    let current = data.answers;
+    let result = '';
+    console.log('index COMP', index);
+
+    const answers = [];
+    if (current && current[index].answers.length) {
+      current.forEach((answer, index) => {
+        console.log('answer->', answer);
+        answers.push(
+          <span key={index}>
+            <label htmlFor='yes'>{answer.text}</label>
+            <input
+              type='radio'
+              id={index}
+              name='answers'
+              value='yes'
+              onChange={getVal}
+            />
+          </span>
+        );
+      });
+    }
+    // result =
+    //   result +
+    //   (
+    //     <div>
+    //       {data.question}
+    //       {answers}
+    //     </div>
+    //   );
+
+    return (
+      <div>
+        {data.question}
+        {answers}
+      </div>
+    );
+  };
+  // const Comp1 = () => {
+  //   return <div>text1</div>;
+  // };
+
   return (
     <form>
-      <h1 >Quiz</h1>
+      <h1>Quiz</h1>
       <fieldset>
         <legend>Personalia:</legend>
 
@@ -86,33 +128,55 @@ function CreateQuiz({ data }) {
           best, click "What's My Type?" to get your results!
         </p>
         <label htmlFor='firstName'>First name</label>
-        <input type='text' name='firstName' onChange={getVal}
-          />
+        <input type='text' name='firstName' onChange={getVal} />
         <label htmlFor='lastName'>Last name</label>
-        <input type='text' name='lastName' onChange={getVal}/>
+        <input type='text' name='lastName' onChange={getVal} />
 
         <p>Would you like to get emails from us?</p>
-        <label htmlFor='yes' >Yes</label>
-        <input type='radio' id='yes' name='emailConsent' value='yes' onChange={getVal}/>
-        <label htmlFor='no' >No</label>
-        <input type='radio' id='no' name='emailConsent' value='no'onChange={getVal} />
+        <label htmlFor='yes'>Yes</label>
+        <input
+          type='radio'
+          id='yes'
+          name='emailConsent'
+          value='yes'
+          onChange={getVal}
+        />
+        <label htmlFor='no'>No</label>
+        <input
+          type='radio'
+          id='no'
+          name='emailConsent'
+          value='no'
+          onChange={getVal}
+        />
 
         <p>Would you like us to save your result?</p>
         <label htmlFor='yes'>Yes</label>
-        <input type='radio' id='yes' name='saveResults' value='yes' onChange={getVal}/>
+        <input
+          type='radio'
+          id='yes'
+          name='saveResults'
+          value='yes'
+          onChange={getVal}
+        />
         <label htmlFor='no'>No</label>
-        <input type='radio' id='no' name='saveResults' value='no' onChange={getVal}/>
+        <input
+          type='radio'
+          id='no'
+          name='saveResults'
+          value='no'
+          onChange={getVal}
+        />
 
         {/* conditional on 'yes' */}
         <label htmlFor='email'>Email address</label>
-        <input type='email' name='email' onChange={getVal}/>
+        <input type='email' name='email' onChange={getVal} />
       </fieldset>
 
-      <fieldset>
-        <div>{data.question}
-        </div>
-        {answers}
-      </fieldset>
+      <fieldset></fieldset>
+
+      <TestComponent data={data}></TestComponent>
+      {/* {1 < 0 && <Comp1></Comp1>} */}
     </form>
   );
 }
