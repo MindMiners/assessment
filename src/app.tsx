@@ -15,6 +15,9 @@ function CreateQuiz({ data }) {
   });
 
   const [index, setIndex] = React.useState(0);
+  
+  const [current, setCurrent] = React.useState(data);
+ 
 
   const getVal = (e) => {
     let inputVal = false;
@@ -41,16 +44,18 @@ function CreateQuiz({ data }) {
   //   );
   // });
 
-  const TestComponent = ({ data }) => {
-    let current = data.answers;
-    let result = '';
-    console.log('index COMP', index);
+  const answerQuestion = (e) => {
+    setCurrent(current.answers[e.target.id]);
+  }
 
-    const answers = [];
-    if (current && current[index].answers.length) {
-      current.forEach((answer, index) => {
-        console.log('answer->', answer);
-        answers.push(
+  const TestComponent = () => {
+    let result = '';
+    console.log('DATA: ', data)
+    const answerArr = [];
+    if (current.answers && current.answers.length) {
+      current.answers.forEach((answer, index) => {
+        // console.log('answer->', answer);
+        answerArr.push(
           <span key={index}>
             <label htmlFor='yes'>{answer.text}</label>
             <input
@@ -58,7 +63,7 @@ function CreateQuiz({ data }) {
               id={index}
               name='answers'
               value='yes'
-              onChange={getVal}
+              onChange={answerQuestion}
             />
           </span>
         );
@@ -75,8 +80,8 @@ function CreateQuiz({ data }) {
 
     return (
       <div>
-        {data.question}
-        {answers}
+        {current.question}
+        {answerArr}
       </div>
     );
   };
