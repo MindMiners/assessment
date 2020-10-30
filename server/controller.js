@@ -103,7 +103,7 @@ controller.postUserMC =  async (req, res, next) => {
   // if they are in mailchimp already...
   if (doesExist) {
     // remove their type tags first, in case their type is different this time
-    mailchimp.post(`/lists/${listID}/members/${subscriberHash}/tags`,
+    await mailchimp.post(`/lists/${listID}/members/${subscriberHash}/tags`,
       {
         tags: [
           {
@@ -212,7 +212,7 @@ controller.postUserMC =  async (req, res, next) => {
     // running it locally
     console.log(tagObject);
 
-    // and then add their type tag and "took asessment" if it's not present already
+    // and then add their type tag and "took assessment" if it's not present already
     mailchimp.post(`/lists/${listID}/members/${subscriberHash}/tags`, tagObject)
       .then((results) => {
         console.log(results);
