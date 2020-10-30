@@ -208,6 +208,10 @@ controller.postUserMC =  async (req, res, next) => {
     // if they took assessment, we'll use the typeAndAssessment tags, otherwise, we'll use the typeOnly tag object
     const tagObject = tookAssessment ? typeAndAssessment : typeOnly;
 
+    // test to see if there's something happening on the hosted server that's different from
+    // running it locally
+    console.log(tagObject);
+
     // and then add their type tag and "took asessment" if it's not present already
     mailchimp.post(`/lists/${listID}/members/${subscriberHash}/tags`, tagObject)
       .then((results) => {
