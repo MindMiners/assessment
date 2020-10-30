@@ -1,7 +1,8 @@
 const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
-const apiRouter = require('./router');
+const dbRouter = require('./dbRouter');
+const mcRouter = require('./mcRouter');
 
 const PORT = 3000;
 const app = express();
@@ -18,7 +19,10 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // });
 
 // router to database
-app.use('/api/db', apiRouter);
+app.use('/api/db', dbRouter);
+
+// mc webhook callback url
+app.use('/api/mc', mcRouter);
 
 // send back a 404 error when we hit any routes we haven't defined
 app.get('*', (req, res) => {
