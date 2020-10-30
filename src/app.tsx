@@ -14,11 +14,6 @@ function CreateQuiz({ data }) {
     tookAssesment: false,
   });
 
-  const [index, setIndex] = React.useState(0);
-  
-  const [current, setCurrent] = React.useState(data);
- 
-
   const getVal = (e) => {
     let inputVal = false;
     console.log('from getVal function', e.target);
@@ -33,61 +28,40 @@ function CreateQuiz({ data }) {
     setUserInfo({ ...userInfo, [e.target.name]: inputVal });
   };
 
-  // const answers = [];
+  const [index, setIndex] = React.useState(0);
 
-  // data.answers.forEach((answer, index) => {
-  //   answers.push(
-  //     <span key={index}>
-  //       <label htmlFor='yes'>{answer.text}</label>
-  //       <input type='radio' id='yes' name='answers' value='yes' />
-  //     </span>
-  //   );
-  // });
+  const [itemchecked, setItemChecked] = React.useState([]);
+  // {
+  //   q: ['Option T', 'Option Ti'],
+  //   index: 0,
+  // }
 
-  const answerQuestion = (e) => {
-    setCurrent(current.answers[e.target.id]);
-  }
-
-  const TestComponent = () => {
-    let result = '';
-    console.log('DATA: ', data)
-    const answerArr = [];
-    if (current.answers && current.answers.length) {
-      current.answers.forEach((answer, index) => {
-        // console.log('answer->', answer);
-        answerArr.push(
-          <span key={index}>
-            <label htmlFor='yes'>{answer.text}</label>
-            <input
-              type='radio'
-              id={index}
-              name='answers'
-              value='yes'
-              onChange={answerQuestion}
-            />
-          </span>
-        );
-      });
-    }
-    // result =
-    //   result +
-    //   (
-    //     <div>
-    //       {data.question}
-    //       {answers}
-    //     </div>
-    //   );
-
+  const TestComponent = ({ level }) => {
+    console.log('DATA: ', level);
+    const answerArr = level.answers;
+    console.log('answerArr', answerArr);
     return (
       <div>
-        {current.question}
-        {answerArr}
+        {level.question}
+        {level.answers.map((answer) => (
+          <span key={answer.option}>
+            <label htmlFor={level.option}>{answer.option}</label>
+            <input
+              type='radio'
+              name={level.option}
+              // name='answers'
+              value='yes'
+              onChange={() => {
+                console.log('clicked answer', answer);
+                console.log('state', itemchecked);
+                return setItemChecked([...itemchecked, answer.name]);
+              }}
+            />
+          </span>
+        ))}
       </div>
     );
   };
-  // const Comp1 = () => {
-  //   return <div>text1</div>;
-  // };
 
   return (
     <form>
@@ -180,8 +154,13 @@ function CreateQuiz({ data }) {
 
       <fieldset></fieldset>
 
-      <TestComponent data={data}></TestComponent>
-      {/* {1 < 0 && <Comp1></Comp1>} */}
+      <TestComponent level={data.inputData}></TestComponent>
+      {/* {/* {itemchecked && <TestComponent></TestComponent>} */}
+      {itemchecked.length && (
+        <TestComponent
+          level={data[itemchecked[itemchecked.length - 1]]}
+        ></TestComponent>
+      )}
     </form>
   );
 }
