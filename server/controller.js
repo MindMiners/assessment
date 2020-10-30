@@ -31,19 +31,18 @@ controller.postUserDB = (req, res, next) => {
     const userDetails = [firstName, lastName, email, type, emailConsent, tookAssessment];
 
     // post the user details to the db!
-    db.query(query, userDetails, (err, results) => {
-      if (err) {
-        next(err);
-      }
-      next();
-    })
+    db.query(query, userDetails)
+      .then(() => {
+        return next()
+      })
+      .catch((err) => next(err));
 
   } catch (err) {
     next(err);
   }
 };
 
-controller.postUserMC =  async (req, res, next) => { 
+controller.postUserMC =  async (req, res, next) => {
   const listID = process.env.LISTID;
   const subscriberHash = `${md5(req.body.email.toLowerCase())}`;
   const { tookAssessment } = req.body;
@@ -81,7 +80,6 @@ controller.postUserMC =  async (req, res, next) => {
   }).catch((e) => {
     // otherwise it's false
     doesExist = false;
-    // console.error(e.response.res.text)
   });
 
   // if the person is not in mailchimp yet...

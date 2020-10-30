@@ -28,7 +28,8 @@ app.get('*', (req, res) => {
 
 // error handler for any errors we don't catch
 app.use((err) => {
-  console.log('uncaught middleware error in express server ', err.message);
+  console.log('uncaught middleware error in express server ', err);
+  res.sendStatus(500);
 });
 
 // start the server on the port we defined with a message to let us know it's running
