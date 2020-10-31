@@ -243,7 +243,12 @@ testData.T = {
 testData.inputData = {
   name: 'inputData',
   option: 'inputData',
+<<<<<<< HEAD
   question: 'Which of the following do you identify with most strongly?  All of these things are a part of us to some degree, so think about what you find to consistently be your “core” - the part of you that everything else serves most of the time - especially when you are at your happiest and healthiest.',
+=======
+  question:
+    'Which of the following do you identify with most strongly? Everyone has elements of each of these, but think about what you find to consistently be your "core" - the part of you that everything else serves most of the time - especially when you are at your happiest and healthiest.',
+>>>>>>> 5ceb44820405116593f6fab255920bda36cff690
   answers: [testData.N, testData.S, testData.F, testData.T],
 };
 
