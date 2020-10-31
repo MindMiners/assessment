@@ -3,9 +3,8 @@ const controller = require('./webhookController');
 
 const router = express.Router();
 
-// to send user details to the database
+// simply for letting mailchimp validate the webhook
 router.get('/', (req, res) => {
-  console.log('hello world');
   res.sendStatus(200);
 });
 

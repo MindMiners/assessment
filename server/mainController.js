@@ -174,7 +174,7 @@ controller.postUserMC =  async (req, res, next) => {
       }
     )
       .then((results) => {
-        console.log(results);
+        // console.log(results);
       })
       .catch((err) => {
         console.log('Had trouble removing old type tags from a member: ', err);
@@ -215,7 +215,7 @@ controller.postUserMC =  async (req, res, next) => {
     // and then add their type tag and "took assessment" if it's not present already
     mailchimp.post(`/lists/${listID}/members/${subscriberHash}/tags`, tagObject)
       .then((results) => {
-        console.log(results);
+        // console.log(results);
       })
       .catch((err) => {
         console.log('Had trouble adding new type and "took assessment" tags to member: ', err);
