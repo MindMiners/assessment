@@ -27,7 +27,7 @@ testData.Ne = {
 };
 
 testData.NiTe = {
-  name: 'NeTe',
+  name: 'NiTe',
   option:
     "I'm not interested in social issues that don't affect me personally as much as I am in practical issues like going to war with other countries, depopulation, or recycling. I don't care that much about what people think about other people. I realize that labels can be useful in the right context, but I don't think they're a good reason to start an argument. I love improving things. I'm good at taking something from 0 to 60, awful or decent to excellence and perfection. I love the taste of victory. I'm happier when I'm achieving my goals. If I'm in charge, I love when people just do what I tell them to. It frustrates me when the person in charge is incompetent and it is not unusual for me to realize that I could do their job better than them. I am somewhat aware of other people's values and feelings, but I won't cater my whole life around making people happy. People's feelings might get hurt sometimes, but someone's got to get the job done.",
   // parent: testData.Ni,
@@ -35,7 +35,7 @@ testData.NiTe = {
 };
 
 testData.NiFe = {
-  name: 'NeFe',
+  name: 'NiFe',
   option:
     'I spend a lot of time dwelling on social issues that center around things like poverty, religion, gender, sexuality, or race, even when they don\'t affect me personally. I find psychology fascinating. I value humanitarian efforts although I am sometimes suspicious of their motives and how well they actually help people. I like the idea of doing something practical to help people, like feeding houseless people or volunteering in a disaster. Although I find people very interesting, I like having a bit of distance from them so that I can study them properly. I don\'t often find people in the world who "get" me, so at any given time I usually only have a handful of friends I trust. I have really good gut instincts and can easily see through shady people - usually before anyone else can.',
   // parent: testData.Ni,
@@ -243,12 +243,8 @@ testData.T = {
 testData.inputData = {
   name: 'inputData',
   option: 'inputData',
-<<<<<<< HEAD
-  question: 'Which of the following do you identify with most strongly?  All of these things are a part of us to some degree, so think about what you find to consistently be your “core” - the part of you that everything else serves most of the time - especially when you are at your happiest and healthiest.',
-=======
   question:
     'Which of the following do you identify with most strongly? Everyone has elements of each of these, but think about what you find to consistently be your "core" - the part of you that everything else serves most of the time - especially when you are at your happiest and healthiest.',
->>>>>>> 5ceb44820405116593f6fab255920bda36cff690
   answers: [testData.N, testData.S, testData.F, testData.T],
 };
 
