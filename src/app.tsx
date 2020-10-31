@@ -65,8 +65,6 @@ function CreateQuiz({ data }) {
     <form onSubmit={handleSubmit}>
       <h1>Quiz</h1>
       <fieldset>
-        <legend>Personalia:</legend>
-
         <p>
           The goal of this assessment is to put language to your thought
           processes. Be careful not to select an answer based on what you think
@@ -104,9 +102,9 @@ function CreateQuiz({ data }) {
           Once you've reached a selection for question 3 that describes you
           best, click "What's My Type?" to get your results!
         </p>
-        <label htmlFor='firstName'>First name</label>
+        <label htmlFor='firstName' className="label">First name</label>
         <input type='text' name='firstName' onChange={getVal} />
-        <label htmlFor='lastName'>Last name</label>
+        <label htmlFor='lastName' className="label">Last name</label>
         <input type='text' name='lastName' onChange={getVal} />
 
         <p>Would you like to get emails from us?</p>
@@ -156,7 +154,7 @@ function CreateQuiz({ data }) {
           {data.inputData.answers.map((answer) => {
             // console.log(answer);
             return (
-              <>
+              <div>
                 <input
                   type='radio'
                   // id='yes'
@@ -166,7 +164,7 @@ function CreateQuiz({ data }) {
                   onChange={getAnswer}
                 />
                 <label htmlFor={data.inputData.name}>{answer.option}</label>
-              </>
+              </div>
             );
           })}{' '}
         </div>
@@ -176,7 +174,7 @@ function CreateQuiz({ data }) {
             {data[userInfo.q2value].answers.map((answer) => {
               // console.log(answer);
               return (
-                <>
+                <div>
                   <input
                     type='radio'
                     // id='yes'
@@ -188,7 +186,7 @@ function CreateQuiz({ data }) {
                   <label htmlFor={data[userInfo.q2value].name}>
                     {answer.option}
                   </label>
-                </>
+                </div>
               );
             })}
           </div>
@@ -199,7 +197,7 @@ function CreateQuiz({ data }) {
             {data[userInfo.q3value].answers.map((answer) => {
               // console.log(answer);
               return (
-                <>
+                <div>
                   <input
                     type='radio'
                     // id='yes'
@@ -211,7 +209,7 @@ function CreateQuiz({ data }) {
                   <label htmlFor={data[userInfo.q3value].name}>
                     {answer.option}
                   </label>
-                </>
+                </div>
               );
             })}
           </div>

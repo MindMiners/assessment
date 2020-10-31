@@ -1,3 +1,37 @@
 h1 {
-  color: green;
+  color: #02182b;
+}
+
+form {
+  width: 650px;
+  margin: 100px auto;
+}
+
+.label {
+  display: block;
+}
+
+fieldset:nth-of-type(2n) input {
+  display: inline;
+
+  width: 25px;
+}
+
+fieldset:nth-of-type(2n) label {
+  width: 600px;
+  display: inline;
+}
+
+fieldset:nth-of-type(2n) div {
+  margin-bottom: 20px;
+}
+
+div p:first-child {
+  font-weight: 800;
+}
+
+button {
+  padding: 10px 20px;
+  background-color: #68c5db;
+  cursor: pointer;
 }
