@@ -14,6 +14,7 @@
     "url": "git+https://github.com/MindMiners/assessment.git"
   },
   "author": "",
+  "proxy": "http://ec2-18-220-207-131.us-east-2.compute.amazonaws.com:3000",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/MindMiners/assessment/issues"
@@ -42,7 +43,6 @@
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "style-loader": "^2.0.0",
-    "typescript": "^4.0.3",
     "@types/react": "^16.9.53",
     "@types/react-dom": "^16.9.8",
     "ts-loader": "^8.0.6",

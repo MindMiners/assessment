@@ -11,12 +11,12 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 // serve up static assets (specifically, this lets us access the CSS and JS)
-// app.use(express.static(path.join(__dirname, '../assets')));
+app.use(express.static(path.join(__dirname, '../src')));
 
-// show the home page on the root path
-// app.get('/', (req, res) => {
-//   res.sendFile(path.join(__dirname, '../views/index.html'));
-// });
+// show the main page on the root path
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, '../public/index.html'));
+});
 
 // router to database
 app.use('/api/db', dbRouter);
