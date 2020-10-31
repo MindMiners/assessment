@@ -1,9 +1,8 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-import * as data from '../data/testData.js';
+import * as data from './data/testData.js';
 
 function CreateQuiz({ data }) {
-  console.log(data);
   return (
     <form>
       <h1>Quiz</h1>

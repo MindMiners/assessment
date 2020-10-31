@@ -22,7 +22,6 @@ function CreateQuiz({ data }) {
 
   const getVal = (e) => {
     let inputVal = false;
-    console.log('from getVal function', e.target);
     if (e.target.type === 'radio') {
       if (e.target.value === 'yes') {
         inputVal = e.target.checked;
@@ -79,8 +78,6 @@ function CreateQuiz({ data }) {
       tookAssessment: true,
     }
 
-    console.log(requestBody);
-
     // fetch request to the backend with some of the state
     fetch('/api/db', {
       method: 'POST', // or 'PUT'
@@ -101,8 +98,6 @@ function CreateQuiz({ data }) {
       ...userInfo,
       submited: true,
     });
-
-    console.log();
   };
 
   return (
@@ -196,7 +191,6 @@ function CreateQuiz({ data }) {
         <div>
           <p>{data.inputData.question}</p>
           {data.inputData.answers.map((answer) => {
-            // console.log(answer);
             return (
               <div>
                 <input
@@ -216,7 +210,6 @@ function CreateQuiz({ data }) {
           <div>
             <p>{data[userInfo.q2value].question}</p>
             {data[userInfo.q2value].answers.map((answer) => {
-              // console.log(answer);
               return (
                 <div>
                   <input
@@ -239,7 +232,6 @@ function CreateQuiz({ data }) {
           <div>
             <p>{data[userInfo.q3value].question}</p>
             {data[userInfo.q3value].answers.map((answer) => {
-              // console.log(answer);
               return (
                 <div>
                   <input

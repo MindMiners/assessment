@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "build": "webpack -p",
-    "start": "webpack-dev-server -d --content-base ./public",
-    "dev-start": "nodemon server/server.js",
+    "dev-start": "webpack-dev-server -d --content-base ./public",
+    "start": "nodemon server/server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
