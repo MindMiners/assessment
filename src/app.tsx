@@ -8,10 +8,16 @@ function CreateQuiz({ data }) {
     firstName: '',
     lastName: '',
     email: '',
-    type: '',
     emailConsent: false,
     saveResults: false,
     tookAssesment: false,
+    q1: true,
+    q2: false,
+    q2value: '',
+    q3: false,
+    q3value: '',
+    submited: false,
+    type: '',
   });
 
   const getVal = (e) => {
@@ -27,44 +33,36 @@ function CreateQuiz({ data }) {
 
     setUserInfo({ ...userInfo, [e.target.name]: inputVal });
   };
+  const getAnswer = (e) => {
+    const lngt = e.target.value.length;
+    const value = e.target.value;
+    if (lngt == 4) {
+      setUserInfo({
+        ...userInfo,
+        type: value,
+      });
+    } else {
+      setUserInfo({
+        ...userInfo,
+        [`q${lngt + 1}`]: true,
+        [`q${lngt + 1}value`]: value,
+      });
+    }
+  };
+  const handleSubmit = (e: any) => {
+    e.preventDefault();
+    //fetch request to the backend with some of the state
 
-  const [index, setIndex] = React.useState(0);
-
-  const [itemchecked, setItemChecked] = React.useState([]);
-  // {
-  //   q: ['Option T', 'Option Ti'],
-  //   index: 0,
-  // }
-
-  const TestComponent = ({ level }) => {
-    console.log('DATA: ', level);
-    const answerArr = level.answers;
-    console.log('answerArr', answerArr);
-    return (
-      <div>
-        {level.question}
-        {level.answers.map((answer) => (
-          <span key={answer.option}>
-            <label htmlFor={level.option}>{answer.option}</label>
-            <input
-              type='radio'
-              name={level.option}
-              // name='answers'
-              value='yes'
-              onChange={() => {
-                console.log('clicked answer', answer);
-                console.log('state', itemchecked);
-                return setItemChecked([...itemchecked, answer.name]);
-              }}
-            />
-          </span>
-        ))}
-      </div>
-    );
+    setUserInfo({
+      ...userInfo,
+      submited: true,
+    });
+    //
+    console.log();
   };
 
   return (
-    <form>
+    <form onSubmit={handleSubmit}>
       <h1>Quiz</h1>
       <fieldset>
         <legend>Personalia:</legend>
@@ -152,15 +150,78 @@ function CreateQuiz({ data }) {
         <input type='email' name='email' onChange={getVal} />
       </fieldset>
 
-      <fieldset></fieldset>
-
-      <TestComponent level={data.inputData}></TestComponent>
-      {/* {/* {itemchecked && <TestComponent></TestComponent>} */}
-      {itemchecked.length && (
-        <TestComponent
-          level={data[itemchecked[itemchecked.length - 1]]}
-        ></TestComponent>
-      )}
+      <fieldset>
+        <div>
+          <p>{data.inputData.question}</p>
+          {data.inputData.answers.map((answer) => {
+            // console.log(answer);
+            return (
+              <>
+                <input
+                  type='radio'
+                  // id='yes'
+                  name={data.inputData.name}
+                  value={answer.name}
+                  // ref={register}
+                  onChange={getAnswer}
+                />
+                <label htmlFor={data.inputData.name}>{answer.option}</label>
+              </>
+            );
+          })}{' '}
+        </div>
+        {userInfo.q2 && (
+          <div>
+            <p>{data[userInfo.q2value].question}</p>
+            {data[userInfo.q2value].answers.map((answer) => {
+              // console.log(answer);
+              return (
+                <>
+                  <input
+                    type='radio'
+                    // id='yes'
+                    name={data[userInfo.q2value].name}
+                    value={answer.name}
+                    // ref={register}
+                    onChange={getAnswer}
+                  />
+                  <label htmlFor={data[userInfo.q2value].name}>
+                    {answer.option}
+                  </label>
+                </>
+              );
+            })}
+          </div>
+        )}
+        {userInfo.q3 && (
+          <div>
+            <p>{data[userInfo.q3value].question}</p>
+            {data[userInfo.q3value].answers.map((answer) => {
+              // console.log(answer);
+              return (
+                <>
+                  <input
+                    type='radio'
+                    // id='yes'
+                    name={data[userInfo.q3value].name}
+                    value={answer.name}
+                    // ref={register}
+                    onChange={getAnswer}
+                  />
+                  <label htmlFor={data[userInfo.q3value].name}>
+                    {answer.option}
+                  </label>
+                </>
+              );
+            })}
+          </div>
+        )}
+        {userInfo.type && (
+          <div>
+            <button type='submit'>Submit</button>
+          </div>
+        )}
+      </fieldset>
     </form>
   );
 }
