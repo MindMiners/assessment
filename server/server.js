@@ -10,8 +10,8 @@ const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-// serve up static assets (specifically, this lets us access the CSS and JS)
-app.use(express.static(path.join(__dirname, '../src')));
+// serve up static assets (specifically, this lets us access the CSS and JS in our bundle)
+app.use(express.static(path.join(__dirname, '../public/build')));
 
 // show the main page on the root path
 app.get('/', (req, res) => {
