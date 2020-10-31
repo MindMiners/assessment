@@ -1,7 +1,7 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import * as data from '../data/testData.js';
-import '../styles.css';
+import './styles.css';
 
 function CreateQuiz({ data }) {
   const [userInfo, setUserInfo] = React.useState({
@@ -49,15 +49,59 @@ function CreateQuiz({ data }) {
       });
     }
   };
-  const handleSubmit = (e: any) => {
-    e.preventDefault();
-    //fetch request to the backend with some of the state
 
+  const handleSubmit = (e: any) => {
+    // prevent page from refreshing on submit
+    e.preventDefault();
+
+    let firstName = '';
+    if (userInfo.firstName) {
+      firstName = userInfo.firstName;
+    }
+    let lastName = '';
+    if (userInfo.lastName) {
+      lastName = userInfo.lastName;
+    }
+    let email = '';
+    if (userInfo.email) {
+      email = userInfo.email;
+    }
+    
+
+    // build up data to send in body
+    const requestBody = {
+      firstName,
+      lastName,
+      email,
+      type: userInfo.type,
+      emailConsent: userInfo.emailConsent,
+      saveResults: userInfo.saveResults,
+      tookAssessment: true,
+    }
+
+    console.log(requestBody);
+
+    // fetch request to the backend with some of the state
+    fetch('/api/db', {
+      method: 'POST', // or 'PUT'
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(requestBody),
+    })
+      .then(() => {
+        console.log('sent user data to backend')
+      })
+      .catch((e) => {
+        console.log('error is: ', e);
+      })
+
+    // change submited to true once the submit button is clicked so we can render the person's results
     setUserInfo({
       ...userInfo,
       submited: true,
     });
-    //
+
     console.log();
   };
 

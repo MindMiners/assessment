@@ -235,7 +235,7 @@ testData.Ti = {
 testData.T = {
   name: 'T',
   option:
-    "The facts, data, and truth are very important to me. I spend a lot of time thinking about what is logical, and what will be most accurate or effective. I like learning new information and coming up with the optimal solutions to problems. I don't spend as much time focusing on feelings as other people seem to, and I hate the idea of emotionalism clouding my judgement. I struggle to relate to people who chose feelings over facts, especially when it is done at the expense of actually solving a problem.",
+ "The facts, data, and truth are very important to me. I spend a lot of time thinking about what is logical, and what will be most accurate or effective. I like learning new information and coming up with the optimal solutions to problems. I don't spend as much time focusing on feelings as other people seem to, and I hate the idea of emotionalism clouding my judgement. I struggle to relate to people who chose feelings over facts, especially when it is done at the expense of actually solving a problem.",
   question: 'Which of these sounds most like you?',
   answers: [testData.Te, testData.Ti],
 };
