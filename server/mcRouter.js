@@ -1,4 +1,5 @@
 const express = require('express');
+const controller = require('./webhookController');
 
 const router = express.Router();
 
@@ -9,7 +10,7 @@ router.get('/', (req, res) => {
 });
 
 // to send user details to the database
-router.post('/', (req, res) => {
+router.post('/', controller.updateUserDB, (req, res) => {
   const { type, data } = req.body;
   console.log(type, data)
   res.sendStatus(200);
