@@ -31,19 +31,18 @@ controller.postUserDB = (req, res, next) => {
     const userDetails = [firstName, lastName, email, type, emailConsent, tookAssessment];
 
     // post the user details to the db!
-    db.query(query, userDetails, (err, results) => {
-      if (err) {
-        next(err);
-      }
-      next();
-    })
+    db.query(query, userDetails)
+      .then(() => {
+        return next()
+      })
+      .catch((err) => next(err));
 
   } catch (err) {
     next(err);
   }
 };
 
-controller.postUserMC =  async (req, res, next) => { 
+controller.postUserMC =  async (req, res, next) => {
   const listID = process.env.LISTID;
   const subscriberHash = `${md5(req.body.email.toLowerCase())}`;
   const { tookAssessment } = req.body;
@@ -81,7 +80,6 @@ controller.postUserMC =  async (req, res, next) => {
   }).catch((e) => {
     // otherwise it's false
     doesExist = false;
-    // console.error(e.response.res.text)
   });
 
   // if the person is not in mailchimp yet...
@@ -105,7 +103,7 @@ controller.postUserMC =  async (req, res, next) => {
   // if they are in mailchimp already...
   if (doesExist) {
     // remove their type tags first, in case their type is different this time
-    mailchimp.post(`/lists/${listID}/members/${subscriberHash}/tags`,
+    await mailchimp.post(`/lists/${listID}/members/${subscriberHash}/tags`,
       {
         tags: [
           {
@@ -210,7 +208,11 @@ controller.postUserMC =  async (req, res, next) => {
     // if they took assessment, we'll use the typeAndAssessment tags, otherwise, we'll use the typeOnly tag object
     const tagObject = tookAssessment ? typeAndAssessment : typeOnly;
 
-    // and then add their type tag and "took asessment" if it's not present already
+    // test to see if there's something happening on the hosted server that's different from
+    // running it locally
+    console.log(tagObject);
+
+    // and then add their type tag and "took assessment" if it's not present already
     mailchimp.post(`/lists/${listID}/members/${subscriberHash}/tags`, tagObject)
       .then((results) => {
         console.log(results);
