@@ -31,7 +31,7 @@ app.get('*', (req, res) => {
 });
 
 // error handler for any errors we don't catch
-app.use((err) => {
+app.use((err, req, res) => {
   console.log('uncaught middleware error in express server ', err);
   res.sendStatus(500);
 });
